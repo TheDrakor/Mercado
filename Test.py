@@ -1,31 +1,48 @@
 import os
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#COMANDO CLEARCONSOLE():
 
 def clearConsole():
     command = 'clear'
     if os.name in ('nt', 'dos'):
         command = 'cls'
     os.system(command)
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#VARIABLES:
 
 dinero = [1500]
-
-while True:
+ticket = [0]
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+while True:	
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#MENU PRINCIPAL:
 
 	def menu_principal():
 		clearConsole()
 		print(f"\n--- Bienvenido a CaliMax ---\n")
 		print(f"1.-Frutas y Verduras\n2.-Higiene\n3.-Lacteos\n4.-Panaderia\n5.-Mascotas\n6.-Galletas\n7.-Botanas\n8.-Legumbres\n9.-Carniceria\nPresione cualquier otra tecla para salir...")
 	menu_principal()
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#TRY/EXCEPT:
+	
 	try:
 		op_menu_principal = int(input("\nQue seccion quieres visitar? -> "))
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	#FUNCIONES:
 
 		def Frutas_Verduras():
 			clearConsole()
 
-			print('\n===FRUTAS Y VERDURAS===\n\n1.-Tomates\n2.-Cebollas\n3.-Aguacates\n4.-Papas\n5.-Manzanas\n6.-Naranjas\n7.-Peras\n8.-Jicama\n9.-Duraznos')
-				
+			print('\n===FRUTAS Y VERDURAS===\n\n1.-Tomates\n2.-Cebollas\n3.-Aguacates\n4.-Papas\n5.-Manzanas\n6.-Naranjas\n7.-Peras\n8.-Jicama\n9.-Duraznos')	
+
 			seccion_frutas_verduras = {'1':12,'2':11,'3':20,'4':15,'5':12,'6':13,'7':14,'8':22,'9':18}
 				
 			op_frutas_verduras = int(input("\nElige una opcion -> "))
+
+			productos = {1:'Tomates',2:'Cebollas',3:'Aguacates',4:'Papas',5:'Manzanas',6:'Naranjas',7:'Peras',8:'Jicama',9:'Duraznos'}
+			print(f"\nProducto: {productos[op_frutas_verduras]}\nPrecio: {seccion_frutas_verduras[str(op_frutas_verduras)]}")
+
 			try:
 				res = int(dinero[-1]) - seccion_frutas_verduras[str(op_frutas_verduras)]
 				dinero.clear()
@@ -34,7 +51,7 @@ while True:
 			except KeyError:
 				print("\n # Porfavor utiliza numeros en el rango especificado #\n")
 				return
-
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def Higiene():
 			clearConsole()
 
@@ -44,6 +61,10 @@ while True:
 
 			op_higiene = int(input("\nElige una opcion -> "))
 
+			productos = {1:'Shampoo',2:'Talco',3:'Desodorante',4:'Jabon para manos',5:'Gel',6:'Perfume',7:'Crema corporal',8:'Papel Higienico',9:'Pasta Dental'}
+			print(f"\nProducto: {productos[op_higiene]}\nPrecio: {seccion_higiene[str(op_higiene)]}")
+
+
 			try:
 				res = int(dinero[-1]) - seccion_higiene[str(op_higiene)]
 				dinero.clear()
@@ -52,7 +73,7 @@ while True:
 			except KeyError:
 				print("\n # Porfavor utiliza numeros en el rango especificado #\n")
 				return
-
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def Lacteos():
 			clearConsole()
 
@@ -62,6 +83,9 @@ while True:
 
 			op_lacteos = int(input("\nElige una opcion -> "))
 
+			productos = {1:'Leche Deslactosada',2:'Yogurt',3:'Helado',4:'Queso',5:'Carnation',6:'Huevos',7:'Leche Entera',8:'Media Crema'}
+			print(f"\nProducto: {productos[op_lacteos]}\nPrecio: {seccion_lacteos[str(op_lacteos)]}")
+
 			try:
 				res = int(dinero[-1]) - seccion_lacteos[str(op_lacteos)]
 				dinero.clear()
@@ -70,7 +94,7 @@ while True:
 			except KeyError:
 				print("\n # Porfavor utiliza numeros en el rango especificado #\n")
 				return
-
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def Panaderia():
 			clearConsole()
 
@@ -80,6 +104,9 @@ while True:
 
 			op_panaderia = int(input("\nElige una opcion -> "))
 
+			productos = {1:'Concha',2:'Orejas',3:'Besos',4:'Cocol',5:'Campechanas',6:'Garibaldis',7:'Polvoron',8:'Ojo de buey',9:'Cuernitos'}
+			print(f"\nProducto: {productos[op_panaderia]}\nPrecio: {seccion_panaderia[str(op_panaderia)]}")
+
 			try:
 				res = int(dinero[-1]) - seccion_panaderia[str(op_panaderia)]
 				dinero.clear()
@@ -88,15 +115,18 @@ while True:
 			except KeyError:
 				print("\n # Porfavor utiliza numeros en el rango especificado #\n")
 				return	
-
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def Mascotas():
 			clearConsole()
 
-			print('\n===MASCOTAS===\n\n1.-Comida\n2.-Collares/Correas\n3.-Ropa\n4.-Shampoo para perros\n5.-Hueso de juguete')
+			print('\n===MASCOTAS===\n\n1.-Comida\n2.-Correa\n3.-Ropa\n4.-Shampoo para perros\n5.-Hueso de juguete')
 
 			seccion_mascotas = {'1':34,'2':63,'3':126,'4':45,'5':32}
 
 			op_mascotas = int(input("\nElige una opcion -> "))
+
+			productos = {1:'Comida',2:'Correa',3:'Ropa',4:'Shampoo para perros',5:'Hueso de juguete'}
+			print(f"\nProducto: {productos[op_mascotas]}\nPrecio: {seccion_mascotas[str(op_mascotas)]}")
 
 			try:
 				res = int(dinero[-1]) - seccion_mascotas[str(op_mascotas)]
@@ -106,7 +136,7 @@ while True:
 			except KeyError:
 				print("\n # Porfavor utiliza numeros en el rango especificado #\n")
 				return
-
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def Galletas():
 			clearConsole()
 
@@ -115,6 +145,9 @@ while True:
 			seccion_galletas = {'1':17,'2':16,'3':18,'4':15,'5':16,'6':14,'7':16,'8':19,'9':25}
 
 			op_galletas = int(input("\nElige una opcion -> "))
+
+			productos = {1:'Emperador',2:'Marias',3:'Principe',4:'Arcoiris',5:'Chokis',6:'Giro',7:'Canelitas',8:'Polvorones',9:'Trikitrakes'}
+			print(f"\nProducto: {productos[op_galletas]}\nPrecio: {seccion_galletas[str(op_galletas)]}")
 			
 			try:
 				res = int(dinero[-1]) - seccion_galletas[str(op_galletas)]
@@ -124,7 +157,7 @@ while True:
 			except KeyError:
 				print("\n # Porfavor utiliza numeros en el rango especificado #\n")
 				return
-
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def Botanas():
 			clearConsole()
 
@@ -134,6 +167,9 @@ while True:
 
 			op_botanas = int(input("\nElige una opcion -> "))
 
+			productos = {1:'Doritos',2:'Ruffles',3:'Paketaxo',4:'Rancheritos',5:'Tostitos',6:'Crujitos',7:'Chips',8:'CHeetos',9:'Sabritas'}
+			print(f"\nProducto: {productos[op_botanas]}\nPrecio: {seccion_botanas[str(op_botanas)]}")
+
 			try:
 				res = int(dinero[-1]) - seccion_botanas[str(op_botanas)]
 				dinero.clear()
@@ -142,7 +178,7 @@ while True:
 			except KeyError:
 				print("\n # Porfavor utiliza numeros en el rango especificado #\n")
 				return
-
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def Legumbres():
 			clearConsole()
 
@@ -151,6 +187,9 @@ while True:
 			seccion_legumbres = {'1':16,'2':16,'3':17,'4':18,'5':17,'6':15,'7':14,'8':15}
 
 			op_legumbres = int(input("\nElige una opcion -> "))
+
+			productos = {1:'Frijol',2:'Arroz',3:'Lentejas',4:'Garbanzo',5:'Maiz Palomero',6:'Almendras',7:'Nuez',8:'Frutas de paraiso'}
+			print(f"\nProducto: {productos[op_legumbres]}\nPrecio: {seccion_legumbres[str(op_legumbres)]}")
 			
 			try:
 				res = int(dinero[-1]) - seccion_legumbres[str(op_legumbres)]
@@ -160,7 +199,7 @@ while True:
 			except KeyError:
 				print("\n # Porfavor utiliza numeros en el rango especificado #\n")
 				return
-				
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------				
 		def Carniceria():
 			clearConsole()
 
@@ -169,6 +208,9 @@ while True:
 			seccion_carniceria = {'1':15,'2':35,'3':23,'4':26,'5':25,'6':103,'7':130,'8':123,'9':152}
 
 			op_carniceria = int(input("\nElige una opcion -> "))
+
+			productos = {1:'Chorizo',2:'Jamon',3:'Salchicha',4:'Tocino',5:'Chicharron',6:'Carne Deshebrada',7:'Pollo',8:'Puerco',9:'Res'}
+			print(f"\nProducto: {productos[op_carniceria]}\nPrecio: {seccion_carniceria[str(op_carniceria)]}")
 			
 			try:
 				res = int(dinero[-1]) - seccion_carniceria[str(op_carniceria)]
@@ -178,10 +220,10 @@ while True:
 			except KeyError:
 				print("\n # Porfavor utiliza numeros en el rango especificado #\n")
 				return	
-
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def error():
 			print("\n# Utiliza enteros en el rango especificado #\n")
-
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		switch_seccion = {
 			1: Frutas_Verduras,
 			2: Higiene,
@@ -193,12 +235,14 @@ while True:
 			8: Legumbres,
 			9: Carniceria
 		}
-
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		switch_seccion.get(op_menu_principal,error)()
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	except ValueError:
-		print("\n# ERROR #\n")	
-	
-	if str(input("Deseas salir? ('N' para continuar, cualquier otra tecla para salir) -> ").upper()) != 'N':
+		print("\n# ERROR #\n")
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	if str(input("Deseas salir? ('S' para salir, cualquier otra tecla para continuar) -> ").upper()) == 'S':
 		break
-
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 print(f"\nQue tenga un excelente dia!\n\nDinero actual: {dinero[-1]}")
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
