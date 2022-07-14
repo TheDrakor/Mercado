@@ -1,4 +1,5 @@
 import os
+import pandas as pd
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #COMANDO CLEARCONSOLE():
 
@@ -9,9 +10,9 @@ def clearConsole():
     os.system(command)
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #VARIABLES:
-
 dinero = [1500]
 ticket = [0]
+carrito = {}
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 while True:	
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -44,10 +45,18 @@ while True:
 			print(f"\nProducto: {productos[op_frutas_verduras]}\nPrecio: {seccion_frutas_verduras[str(op_frutas_verduras)]}")
 
 			try:
-				res = int(dinero[-1]) - seccion_frutas_verduras[str(op_frutas_verduras)]
-				dinero.clear()
-				dinero.append(res)
-				print(f"\nDinero actual: {dinero[0]}")
+
+				res = int(ticket[-1]) + seccion_frutas_verduras[str(op_frutas_verduras)]
+				ticket.clear()
+				ticket.append(res)
+				print(f"\nTicket: {ticket[0]}\n")
+
+				carrito[str(productos[op_frutas_verduras])] = str(seccion_frutas_verduras[str(op_frutas_verduras)])
+
+				s = pd.Series(carrito,dtype= "string")
+
+				print(f"---Carrito---\n\n{s}")
+
 			except KeyError:
 				print("\n # Porfavor utiliza numeros en el rango especificado #\n")
 				return
@@ -66,10 +75,16 @@ while True:
 
 
 			try:
-				res = int(dinero[-1]) - seccion_higiene[str(op_higiene)]
-				dinero.clear()
-				dinero.append(res)
-				print(f"\nDinero actual: {dinero[0]}")
+				res = int(ticket[-1]) + seccion_higiene[str(op_higiene)]
+				ticket.clear()
+				ticket.append(res)
+				print(f"\nTicket: {ticket[0]}\n")
+
+				carrito[str(productos[op_higiene])] = str(seccion_higiene[str(op_higiene)])
+
+				s = pd.Series(carrito,dtype= "string")
+
+				print(f"---Carrito---\n\n{s}")
 			except KeyError:
 				print("\n # Porfavor utiliza numeros en el rango especificado #\n")
 				return
@@ -87,10 +102,16 @@ while True:
 			print(f"\nProducto: {productos[op_lacteos]}\nPrecio: {seccion_lacteos[str(op_lacteos)]}")
 
 			try:
-				res = int(dinero[-1]) - seccion_lacteos[str(op_lacteos)]
-				dinero.clear()
-				dinero.append(res)
-				print(f"\nDinero actual: {dinero[0]}")
+				res = int(ticket[-1]) + seccion_lacteos[str(op_lacteos)]
+				ticket.clear()
+				ticket.append(res)
+				print(f"\nTicket: {ticket[0]}\n")
+
+				carrito[str(productos[op_lacteos])] = str(seccion_lacteos[str(op_lacteos)])
+
+				s = pd.Series(carrito,dtype= "string")
+
+				print(f"---Carrito---\n\n{s}")
 			except KeyError:
 				print("\n # Porfavor utiliza numeros en el rango especificado #\n")
 				return
@@ -108,10 +129,16 @@ while True:
 			print(f"\nProducto: {productos[op_panaderia]}\nPrecio: {seccion_panaderia[str(op_panaderia)]}")
 
 			try:
-				res = int(dinero[-1]) - seccion_panaderia[str(op_panaderia)]
-				dinero.clear()
-				dinero.append(res)
-				print(f"\nDinero actual: {dinero[0]}")
+				res = int(ticket[-1]) + seccion_panaderia[str(op_panaderia)]
+				ticket.clear()
+				ticket.append(res)
+				print(f"\nTicket: {ticket[0]}\n")
+
+				carrito[str(productos[op_panaderia])] = str(seccion_panaderia[str(op_panaderia)])
+
+				s = pd.Series(carrito,dtype= "string")
+
+				print(f"---Carrito---\n\n{s}")
 			except KeyError:
 				print("\n # Porfavor utiliza numeros en el rango especificado #\n")
 				return	
@@ -129,10 +156,16 @@ while True:
 			print(f"\nProducto: {productos[op_mascotas]}\nPrecio: {seccion_mascotas[str(op_mascotas)]}")
 
 			try:
-				res = int(dinero[-1]) - seccion_mascotas[str(op_mascotas)]
-				dinero.clear()
-				dinero.append(res)
-				print(f"\nDinero actual: {dinero[0]}")
+				res = int(ticket[-1]) + seccion_mascotas[str(op_mascotas)]
+				ticket.clear()
+				ticket.append(res)
+				print(f"\nTicket: {ticket[0]}\n")
+
+				carrito[str(productos[op_mascotas])] = str(seccion_mascotas[str(op_mascotas)])
+
+				s = pd.Series(carrito,dtype= "string")
+
+				print(f"---Carrito---\n\n{s}")
 			except KeyError:
 				print("\n # Porfavor utiliza numeros en el rango especificado #\n")
 				return
@@ -150,10 +183,16 @@ while True:
 			print(f"\nProducto: {productos[op_galletas]}\nPrecio: {seccion_galletas[str(op_galletas)]}")
 			
 			try:
-				res = int(dinero[-1]) - seccion_galletas[str(op_galletas)]
-				dinero.clear()
-				dinero.append(res)
-				print(f"\nDinero actual: {dinero[0]}")
+				res = int(ticket[-1]) + seccion_galletas[str(op_galletas)]
+				ticket.clear()
+				ticket.append(res)
+				print(f"\nTicket: {ticket[0]}\n")
+
+				carrito[str(productos[op_galletas])] = str(seccion_galletas[str(op_galletas)])
+
+				s = pd.Series(carrito,dtype= "string")
+
+				print(f"---Carrito---\n\n{s}")
 			except KeyError:
 				print("\n # Porfavor utiliza numeros en el rango especificado #\n")
 				return
@@ -171,10 +210,16 @@ while True:
 			print(f"\nProducto: {productos[op_botanas]}\nPrecio: {seccion_botanas[str(op_botanas)]}")
 
 			try:
-				res = int(dinero[-1]) - seccion_botanas[str(op_botanas)]
-				dinero.clear()
-				dinero.append(res)
-				print(f"\nDinero actual: {dinero[0]}")
+				res = int(ticket[-1]) + seccion_botanas[str(op_botanas)]
+				ticket.clear()
+				ticket.append(res)
+				print(f"\nTicket: {ticket[0]}\n")
+
+				carrito[str(productos[op_botanas])] = str(seccion_botanas[str(op_botanas)])
+
+				s = pd.Series(carrito,dtype= "string")
+
+				print(f"---Carrito---\n\n{s}")
 			except KeyError:
 				print("\n # Porfavor utiliza numeros en el rango especificado #\n")
 				return
@@ -192,10 +237,16 @@ while True:
 			print(f"\nProducto: {productos[op_legumbres]}\nPrecio: {seccion_legumbres[str(op_legumbres)]}")
 			
 			try:
-				res = int(dinero[-1]) - seccion_legumbres[str(op_legumbres)]
-				dinero.clear()
-				dinero.append(res)
-				print(f"\nDinero actual: {dinero[0]}")
+				res = int(ticket[-1]) + seccion_legumbres[str(op_legumbres)]
+				ticket.clear()
+				ticket.append(res)
+				print(f"\nTicket: {ticket[0]}\n")
+
+				carrito[str(productos[op_legumbres])] = str(seccion_legumbres[str(op_legumbres)])
+
+				s = pd.Series(carrito,dtype= "string")
+
+				print(f"---Carrito---\n\n{s}")
 			except KeyError:
 				print("\n # Porfavor utiliza numeros en el rango especificado #\n")
 				return
@@ -213,10 +264,16 @@ while True:
 			print(f"\nProducto: {productos[op_carniceria]}\nPrecio: {seccion_carniceria[str(op_carniceria)]}")
 			
 			try:
-				res = int(dinero[-1]) - seccion_carniceria[str(op_carniceria)]
-				dinero.clear()
-				dinero.append(res)
-				print(f"\nDinero actual: {dinero[0]}")
+				res = int(ticket[-1]) + seccion_carniceria[str(op_carniceria)]
+				ticket.clear()
+				ticket.append(res)
+				print(f"\nTicket: {ticket[0]}\n")
+
+				carrito[str(productos[op_carniceria])] = str(seccion_carniceria[str(op_carniceria)])
+
+				s = pd.Series(carrito,dtype= "string")
+
+				print(f"---Carrito---\n\n{s}")
 			except KeyError:
 				print("\n # Porfavor utiliza numeros en el rango especificado #\n")
 				return	
@@ -241,8 +298,8 @@ while True:
 	except ValueError:
 		print("\n# ERROR #\n")
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	if str(input("Deseas salir? ('S' para salir, cualquier otra tecla para continuar) -> ").upper()) == 'S':
+	if str(input("\nDeseas salir? ('S' para salir, cualquier otra tecla para continuar) -> ").upper()) == 'S':
 		break
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-print(f"\nQue tenga un excelente dia!\n\nDinero actual: {dinero[-1]}")
+print(f"\nQue tenga un excelente dia!\n\nTicket: {ticket[0]}\n\nDinero actual: {int(dinero[-1]) - int(ticket[0])}")
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
