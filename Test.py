@@ -13,7 +13,19 @@ def clearConsole():
 
 dinero = [1500]
 ticket = [0]
-carrito = {'PRODUCTO':' \tPRECIO\n'}
+carrito = {'PRODUCTO':' \tPRECIO''\t\tPIEZAS\n'}
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#LISTAS:
+
+frutas_verduras_list = []
+higiene_list = []
+lacteos_list = []
+panaderia_list = []
+mascotas_list = []
+galletas_list = []
+botanas_list = []
+legumbres_list = []
+carniceria_list = []
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 while True:	
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -21,7 +33,7 @@ while True:
 
 	def menu_principal():
 		clearConsole()
-		print(f"\n--- Bienvenido a CaliMax ---\n")
+		print(f"--- Bienvenido a CaliMax ---\n")
 		print(f"1.-Frutas y Verduras\n2.-Higiene\n3.-Lacteos\n4.-Panaderia\n5.-Mascotas\n6.-Galletas\n7.-Botanas\n8.-Legumbres\n9.-Carniceria\nPresione cualquier otra tecla para salir...")
 	menu_principal()
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -36,20 +48,25 @@ while True:
 		def Frutas_Verduras():
 			clearConsole()
 
-			print('\n===FRUTAS Y VERDURAS===\n\n1.-Tomates\n2.-Cebollas\n3.-Aguacates\n4.-Papas\n5.-Manzanas\n6.-Naranjas\n7.-Peras\n8.-Jicama\n9.-Duraznos')	
+			print('===FRUTAS Y VERDURAS===\n\n1.-Tomates\n2.-Cebollas\n3.-Aguacates\n4.-Papas\n5.-Manzanas\n6.-Naranjas\n7.-Peras\n8.-Jicama\n9.-Duraznos')	
 
 			seccion_frutas_verduras = {'1':12,'2':11,'3':20,'4':15,'5':12,'6':13,'7':14,'8':22,'9':18}
 				
 			op_frutas_verduras = int(input("\nElige una opcion -> "))
 
+			clearConsole()
+
 			productos = {1:'Tomates',2:'Cebollas',3:'Aguacates',4:'Papas',5:'Manzanas',6:'Naranjas',7:'Peras',8:'Jicama',9:'Duraznos'}
-			print(f"\nProducto: {productos[op_frutas_verduras]}\nPrecio: {seccion_frutas_verduras[str(op_frutas_verduras)]}")
+			print(f"===COMPRA DEL PRODUCTO===\n\nProducto: {productos[op_frutas_verduras]}\nPrecio: $ {seccion_frutas_verduras[str(op_frutas_verduras)]}")
 
-			res = int(ticket[-1]) + seccion_frutas_verduras[str(op_frutas_verduras)]
-			ticket.clear()
-			ticket.append(res)
+			frutas_verduras_list.append(productos[op_frutas_verduras])
 
-			carrito[str(productos[op_frutas_verduras])] = str(seccion_frutas_verduras[str(op_frutas_verduras)])
+			if input('\nDesea agregarlo al carrito (Y/N)? ').upper() == 'Y':
+				res = int(ticket[-1]) + seccion_frutas_verduras[str(op_frutas_verduras)]
+				ticket.clear()
+				ticket.append(res)
+				carrito[str(productos[op_frutas_verduras])] = (f"{seccion_frutas_verduras[str(op_frutas_verduras)]}\t\t{frutas_verduras_list.count(productos[op_frutas_verduras])}")
+				print("Se ha agregado al carrito! ")
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def Higiene():
 			clearConsole()
@@ -63,10 +80,12 @@ while True:
 			productos = {1:'Shampoo',2:'Talco',3:'Desodorante',4:'Jabon para manos',5:'Gel',6:'Perfume',7:'Crema corporal',8:'Papel Higienico',9:'Pasta Dental'}
 			print(f"\nProducto: {productos[op_higiene]}\nPrecio: {seccion_higiene[str(op_higiene)]}")
 
-			res = int(ticket[-1]) + seccion_higiene[str(op_higiene)]
-			ticket.clear()
-			ticket.append(res)
-			carrito[str(productos[op_higiene])] = str(seccion_higiene[str(op_higiene)])
+			if input('\nDesea agregarlo al carrito (Y/N)? ').upper() == 'Y':
+				res = int(ticket[-1]) + seccion_higiene[str(op_higiene)]
+				ticket.clear()
+				ticket.append(res)
+				carrito[str(productos[op_higiene])] = str(seccion_higiene[str(op_higiene)])
+				print("Se ha agregado al carrito! ")
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def Lacteos():
 			clearConsole()
@@ -80,11 +99,12 @@ while True:
 			productos = {1:'Leche Deslactosada',2:'Yogurt',3:'Helado',4:'Queso',5:'Carnation',6:'Huevos',7:'Leche Entera',8:'Media Crema'}
 			print(f"\nProducto: {productos[op_lacteos]}\nPrecio: {seccion_lacteos[str(op_lacteos)]}")
 
-			res = int(ticket[-1]) + seccion_lacteos[str(op_lacteos)]
-			ticket.clear()
-			ticket.append(res)
-
-			carrito[str(productos[op_lacteos])] = str(seccion_lacteos[str(op_lacteos)])
+			if input('\nDesea agregarlo al carrito (Y/N)? ').upper() == 'Y':
+				res = int(ticket[-1]) + seccion_lacteos[str(op_lacteos)]
+				ticket.clear()
+				ticket.append(res)
+				carrito[str(productos[op_lacteos])] = str(seccion_lacteos[str(op_lacteos)])
+				print("Se ha agregado al carrito! ")
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def Panaderia():
 			clearConsole()
@@ -98,11 +118,12 @@ while True:
 			productos = {1:'Concha',2:'Orejas',3:'Besos',4:'Cocol',5:'Campechanas',6:'Garibaldis',7:'Polvoron',8:'Ojo de buey',9:'Cuernitos'}
 			print(f"\nProducto: {productos[op_panaderia]}\nPrecio: {seccion_panaderia[str(op_panaderia)]}")
 
-			res = int(ticket[-1]) + seccion_panaderia[str(op_panaderia)]
-			ticket.clear()
-			ticket.append(res)
-
-			carrito[str(productos[op_panaderia])] = str(seccion_panaderia[str(op_panaderia)])	
+			if input('\nDesea agregarlo al carrito (Y/N)? ').upper() == 'Y':
+				res = int(ticket[-1]) + seccion_panaderia[str(op_panaderia)]
+				ticket.clear()
+				ticket.append(res)
+				carrito[str(productos[op_panaderia])] = str(seccion_panaderia[str(op_panaderia)])
+				print("Se ha agregado al carrito! ")
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def Mascotas():
 			clearConsole()
@@ -116,11 +137,12 @@ while True:
 			productos = {1:'Comida',2:'Correa',3:'Ropa',4:'Shampoo para perros',5:'Hueso de juguete'}
 			print(f"\nProducto: {productos[op_mascotas]}\nPrecio: {seccion_mascotas[str(op_mascotas)]}")
 
-			res = int(ticket[-1]) + seccion_mascotas[str(op_mascotas)]
-			ticket.clear()
-			ticket.append(res)
-
-			carrito[str(productos[op_mascotas])] = str(seccion_mascotas[str(op_mascotas)])
+			if input('\nDesea agregarlo al carrito (Y/N)? ').upper() == 'Y':
+				res = int(ticket[-1]) + seccion_mascotas[str(op_mascotas)]
+				ticket.clear()
+				ticket.append(res)
+				carrito[str(productos[op_mascotas])] = str(seccion_mascotas[str(op_mascotas)])
+				print("Se ha agregado al carrito! ")
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def Galletas():
 			clearConsole()
@@ -134,11 +156,12 @@ while True:
 			productos = {1:'Emperador',2:'Marias',3:'Principe',4:'Arcoiris',5:'Chokis',6:'Giro',7:'Canelitas',8:'Polvorones',9:'Trikitrakes'}
 			print(f"\nProducto: {productos[op_galletas]}\nPrecio: {seccion_galletas[str(op_galletas)]}")
 			
-			res = int(ticket[-1]) + seccion_galletas[str(op_galletas)]
-			ticket.clear()
-			ticket.append(res)
-
-			carrito[str(productos[op_galletas])] = str(seccion_galletas[str(op_galletas)])
+			if input('\nDesea agregarlo al carrito (Y/N)? ').upper() == 'Y':
+				res = int(ticket[-1]) + seccion_galletas[str(op_galletas)]
+				ticket.clear()
+				ticket.append(res)
+				carrito[str(productos[op_galletas])] = str(seccion_galletas[str(op_galletas)])
+				print("Se ha agregado al carrito! ")
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def Botanas():
 			clearConsole()
@@ -152,11 +175,12 @@ while True:
 			productos = {1:'Doritos',2:'Ruffles',3:'Paketaxo',4:'Rancheritos',5:'Tostitos',6:'Crujitos',7:'Chips',8:'CHeetos',9:'Sabritas'}
 			print(f"\nProducto: {productos[op_botanas]}\nPrecio: {seccion_botanas[str(op_botanas)]}")
 
-			res = int(ticket[-1]) + seccion_botanas[str(op_botanas)]
-			ticket.clear()
-			ticket.append(res)
-
-			carrito[str(productos[op_botanas])] = str(seccion_botanas[str(op_botanas)])
+			if input('\nDesea agregarlo al carrito (Y/N)? ').upper() == 'Y':
+				res = int(ticket[-1]) + seccion_botanas[str(op_botanas)]
+				ticket.clear()
+				ticket.append(res)
+				carrito[str(productos[op_botanas])] = str(seccion_botanas[str(op_botanas)])
+				print("Se ha agregado al carrito! ")
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def Legumbres():
 			clearConsole()
@@ -170,11 +194,12 @@ while True:
 			productos = {1:'Frijol',2:'Arroz',3:'Lentejas',4:'Garbanzo',5:'Maiz Palomero',6:'Almendras',7:'Nuez',8:'Frutas de paraiso'}
 			print(f"\nProducto: {productos[op_legumbres]}\nPrecio: {seccion_legumbres[str(op_legumbres)]}")
 			
-			res = int(ticket[-1]) + seccion_legumbres[str(op_legumbres)]
-			ticket.clear()
-			ticket.append(res)
-
-			carrito[str(productos[op_legumbres])] = str(seccion_legumbres[str(op_legumbres)])
+			if input('\nDesea agregarlo al carrito (Y/N)? ').upper() == 'Y':
+				res = int(ticket[-1]) + seccion_legumbres[str(op_legumbres)]
+				ticket.clear()
+				ticket.append(res)
+				carrito[str(productos[op_legumbres])] = str(seccion_legumbres[str(op_legumbres)])
+				print("Se ha agregado al carrito! ")
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------				
 		def Carniceria():
 			clearConsole()
@@ -188,12 +213,12 @@ while True:
 			productos = {1:'Chorizo',2:'Jamon',3:'Salchicha',4:'Tocino',5:'Chicharron',6:'Carne Deshebrada',7:'Pollo',8:'Puerco',9:'Res'}
 			print(f"\nProducto: {productos[op_carniceria]}\nPrecio: {seccion_carniceria[str(op_carniceria)]}")
 			
-			res = int(ticket[-1]) + seccion_carniceria[str(op_carniceria)]
-			ticket.clear()
-			ticket.append(res)
-
-			carrito[str(productos[op_carniceria])] = str(seccion_carniceria[str(op_carniceria)])
-
+			if input('\nDesea agregarlo al carrito (Y/N)? ').upper() == 'Y':
+				res = int(ticket[-1]) + seccion_carniceria[str(op_carniceria)]
+				ticket.clear()
+				ticket.append(res)
+				carrito[str(productos[op_carniceria])] = str(seccion_carniceria[str(op_carniceria)])
+				print("Se ha agregado al carrito! ")
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def error():
 			print("\n# Utiliza enteros en el rango especificado #\n")
@@ -216,11 +241,10 @@ while True:
 			print("\n# Porfavor utiliza numeros en el rango especificado #")
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #EXCEPT:
-
 	except ValueError:
 		print("\n# ERROR #\n")
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	if str(input("\nDeseas salir? ('S' para salir, cualquier otra tecla para continuar) -> ").upper()) == 'S':
+	if str(input("\nPresiona 'S' para salir, cualquier otra tecla para continuar -> ").upper()) == 'S':
 		if ticket[0] == 0:
 			break
 		else:
@@ -228,5 +252,5 @@ while True:
 			print(f"\n---TICKET---\n\n{s}")
 			break
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-print(f"\nTotal: {ticket[0]}\n\nDinero actual: {int(dinero[-1]) - int(ticket[0])}\nQue tenga un excelente dia!")
+print(f"\nTotal: ${ticket[0]}\n\nDinero actual: {int(dinero[-1]) - int(ticket[0])}\nQue tenga un excelente dia!")
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
