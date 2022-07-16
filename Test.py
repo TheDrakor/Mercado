@@ -257,7 +257,7 @@ while True:
 	except ValueError:
 		print("\n# ERROR #\n")
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	if str(input("\nPresiona 'S' para salir, cualquier otra tecla para continuar -> ").upper()) == 'S':
+	if str(input("\nPresiona 'X' para salir '0' para continuar -> ").upper()) == 'X':
 		if ticket[-1] == 0:
 			break
 		else:
