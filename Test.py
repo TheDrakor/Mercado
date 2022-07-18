@@ -1,5 +1,7 @@
 import os
 import pandas as pd
+import random as rm
+from datetime import date, time, datetime
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #COMANDO CLEARCONSOLE():
 
@@ -11,7 +13,9 @@ def clearConsole():
 dinero = [1500]
 ticket = [0]
 ticket_actual = [0]
-carrito = {'PRODUCTO':'\tPRECIO''\t\tPIEZAS\n'}
+carrito = {}
+carrito['Articulo'] = (f"\t   Cant.\t\tTotal")
+cuenta = {}
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #LISTAS:
 
@@ -25,6 +29,10 @@ botanas_list = []
 legumbres_list = []
 carniceria_list = []
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#EMPLEADOS:
+
+empleados = ['MARIA','PEPE','JOSE','JAIME','XIMENA','ESTEPHANY','KARLA','GUILLERMO','HECTOR','JAZMIN']
+
 while True:	
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #MENU PRINCIPAL:
@@ -34,7 +42,6 @@ while True:
 		print(f"--- Bienvenido a CaliMax ---\n")
 		print(f"1.-Frutas y Verduras\n2.-Higiene\n3.-Lacteos\n4.-Panaderia\n5.-Mascotas\n6.-Galletas\n7.-Botanas\n8.-Legumbres\n9.-Carniceria\nPresione cualquier otra tecla para salir...")
 	menu_principal()
-	print(f"\nDinero actual: $ {dinero[-1]}")
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #TRY:
 	
@@ -53,13 +60,12 @@ while True:
 			if res < int(dinero[-1]):
 				ticket.clear()
 				ticket.append(res)
-				dinero[0] = int(dinero[0]) - int(seccion[str(op)])
 				print("Se ha agregado al carrito! ")
 				return seccion,op,productos,res
 			else:
 				print(f"\nNo tienes suficiente dinero...")
 				return seccion,op,productos,res
-
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def Frutas_Verduras():
 			clearConsole()
 
@@ -79,7 +85,7 @@ while True:
 			if input('\nDesea agregarlo al carrito (Y/N)? ').upper() == 'Y':
 				compra_del_producto(seccion,op,productos)
 				if int(ticket_actual[-1]) < int(dinero[-1]):
-					carrito[str(productos[op])] = (f"{seccion[str(op)]}\t\t{frutas_verduras_list.count(productos[op])}")
+					carrito[(f"{productos[op]}")] = (f"{frutas_verduras_list.count(productos[op])}\t\t{int(seccion[str(op)]) * frutas_verduras_list.count(productos[op])}")
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def Higiene():
 			clearConsole()
@@ -98,7 +104,7 @@ while True:
 			if input('\nDesea agregarlo al carrito (Y/N)? ').upper() == 'Y':
 				compra_del_producto(seccion,op,productos)
 				if int(ticket_actual[0]) < int(dinero[0]):
-					carrito[str(productos[op])] = (f"{seccion[str(op)]}\t\t{higiene_list.count(productos[op])}")
+					carrito[(f"{productos[op]}")] = (f"{higiene_list.count(productos[op])}\t\t{int(seccion[str(op)]) * higiene_list.count(productos[op])}")
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def Lacteos():
 			clearConsole()
@@ -117,8 +123,8 @@ while True:
 			if input('\nDesea agregarlo al carrito (Y/N)? ').upper() == 'Y':
 				compra_del_producto(seccion,op,productos)
 				if int(ticket_actual[0]) < int(dinero[0]):
-					carrito[str(productos[op])] = (f"{seccion[str(op)]}\t\t{lacteos_list.count(productos[op])}")
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+					carrito[(f"{productos[op]}")] = (f"{lacteos_list.count(productos[op])}\t\t{int(seccion[str(op)]) * lacteos_list.count(productos[op])}")
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------		
 		def Panaderia():
 			clearConsole()
 
@@ -136,7 +142,7 @@ while True:
 			if input('\nDesea agregarlo al carrito (Y/N)? ').upper() == 'Y':
 				compra_del_producto(seccion,op,productos)
 				if int(ticket_actual[0]) < int(dinero[0]):
-					carrito[str(productos[op])] = (f"{seccion[str(op)]}\t\t{panaderia_list.count(productos[op])}")
+					carrito[(f"{productos[op]}")] = (f"{panaderia_list.count(productos[op])}\t\t{int(seccion[str(op)]) * panaderia_list.count(productos[op])}")
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def Mascotas():
 			clearConsole()
@@ -155,7 +161,7 @@ while True:
 			if input('\nDesea agregarlo al carrito (Y/N)? ').upper() == 'Y':
 				compra_del_producto(seccion,op,productos)
 				if int(ticket_actual[0]) < int(dinero[0]):
-					carrito[str(productos[op])] = (f"{seccion[str(op)]}\t\t{mascotas_list.count(productos[op])}")
+					carrito[(f"{productos[op]}")] = (f"{mascotas_list.count(productos[op])}\t\t{int(seccion[str(op)]) * mascotas_list.count(productos[op])}")
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def Galletas():
 			clearConsole()
@@ -174,7 +180,7 @@ while True:
 			if input('\nDesea agregarlo al carrito (Y/N)? ').upper() == 'Y':
 				compra_del_producto(seccion,op,productos)
 				if int(ticket_actual[0]) < int(dinero[0]):
-					carrito[str(productos[op])] = (f"{seccion[str(op)]}\t\t{galletas_list.count(productos[op])}")
+					carrito[(f"{productos[op]}")] = (f"{galletas_list.count(productos[op])}\t\t{int(seccion[str(op)]) * galletas_list.count(productos[op])}")
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def Botanas():
 			clearConsole()
@@ -193,7 +199,7 @@ while True:
 			if input('\nDesea agregarlo al carrito (Y/N)? ').upper() == 'Y':
 				compra_del_producto(seccion,op,productos)
 				if int(ticket_actual[0]) < int(dinero[0]):
-					carrito[str(productos[op])] = (f"{seccion[str(op)]}\t\t{botanas_list.count(productos[op])}")
+					carrito[(f"{productos[op]}")] = (f"{botanas_list.count(productos[op])}\t\t{int(seccion[str(op)]) * botanas_list.count(productos[op])}")
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def Legumbres():
 			clearConsole()
@@ -212,7 +218,7 @@ while True:
 			if input('\nDesea agregarlo al carrito (Y/N)? ').upper() == 'Y':
 				compra_del_producto(seccion,op,productos)
 				if int(ticket_actual[0]) < int(dinero[0]):
-					carrito[str(productos[op])] = (f"{seccion[str(op)]}\t\t{legumbres_list.count(productos[op])}")
+					carrito[(f"{productos[op]}")] = (f"{legumbres_list.count(productos[op])}\t\t{int(seccion[str(op)]) * legumbres_list.count(productos[op])}")
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------				
 		def Carniceria():
 			clearConsole()
@@ -231,7 +237,7 @@ while True:
 			if input('\nDesea agregarlo al carrito (Y/N)? ').upper() == 'Y':
 				compra_del_producto(seccion,op,productos)
 				if int(ticket_actual[0]) < int(dinero[0]):
-					carrito[str(productos[op])] = (f"{seccion[str(op)]}\t\t{carniceria_list.count(productos[op])}")
+					carrito[(f"{productos[op]}")] = (f"{carniceria_list.count(productos[op])}\t\t{int(seccion[str(op)]) * carniceria_list.count(productos[op])}")
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def error():
 			print("\n# Utiliza enteros en el rango especificado #\n")
@@ -257,13 +263,29 @@ while True:
 	except ValueError:
 		print("\n# ERROR #\n")
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	def ticket_de_compra():
+		carrito[' '] = ' '
+		s = pd.Series(carrito,dtype = 'string')
+		dt = datetime.now()
+		print(f"\n{'-'*58}\nCALIMAX - LOS ENCINOS\nPuerto Ballarta 505 - 5a Planta\n{rm.choice(range(10000,99999))} - Puerto Rico\nCIF: {rm.choice(range(12200000,99999999))}\n\nCaja N. : 22321\t\tFactura Simplificada: {rm.choice(range(222400000000,999999999999))}\n\nTe atiende: {rm.choice(empleados)}\t\tFecha: {date.today()} {dt.hour}:{dt.minute}\n\n{'-'*58}\n{s}\n{'-'*58}")
+
+		total_iva = int(ticket[-1]) + (int(ticket[-1])*0.16)
+		cuenta['Subtotal:              '] = ticket[-1]
+		cuenta['IVA %16:'] = int(ticket[-1])*0.16
+		cuenta['Total:'] = total_iva
+		cuenta['Usted pago:'] = dinero[-1]
+		cuenta['Cambio:'] = (int(dinero[-1]) - total_iva)
+		cuenta[' '] = ' '
+		c = pd.Series(cuenta)
+		print(c)
+
 	if str(input("\nPresiona 'X' para salir '0' para continuar -> ").upper()) == 'X':
 		if ticket[-1] == 0:
 			break
 		else:
-			s = pd.Series(carrito,dtype = 'string')
-			print(f"\n---TICKET---\n{'-'*42}\n{s}\n{'-'*42}")
+			ticket_de_compra()
 			break
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-print(f"\nTotal: ${ticket[-1]}\n\nDinero actual: {dinero[-1]}\nQue tenga un excelente dia!")
+print("\nGracias por su compra!\n")
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
