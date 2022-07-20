@@ -1,18 +1,25 @@
 import os
 import pandas as pd
 import random as rm
+import csv
 from datetime import date, time, datetime
+from csv import writer
+from os import remove
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#COMANDO CLEARCONSOLE():
+#COMANDO CLEARCONSOLE,BORRAR_TICKET():
 
 def clearConsole():
 	os.system('clear')
+def borrar_ticket():
+	remove('/home/jesus/Desktop/Testing/ticket.csv')
+	with open('ticket.csv', 'w') as csvfile:
+	    fieldnames = ['Producto', '        Precio', '        Cantidad', '        Total']
+	    writer = csv.DictWriter(csvfile, fieldnames = fieldnames)
+	    writer.writeheader()
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #VARIABLES:
 ticket = [0]
 ticket_actual = [0]
-carrito = {}
-carrito['Articulo'] = (f"\t   Cant.\t\tTotal")
 cuenta = {}
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #LISTA:
@@ -23,7 +30,7 @@ lista = []
 empleados = ['MARIA','PEPE','JOSE','JAIME','XIMENA','ESTEPHANY','KARLA','GUILLERMO','HECTOR','JAZMIN']
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #CICLO WHILE:
-
+borrar_ticket()
 while True:
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #MENU PRINCIPAL:
@@ -35,20 +42,24 @@ while True:
 	menu_principal()
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #TRY:
-	
+
 	try:
 		op_menu_principal = int(input("\nQue seccion quieres visitar? -> "))
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	#FUNCIONES:
 
-		def compra_del_producto(seccion,op,productos):
+		def agregar_al_ticket(seccion,op,productos,cantidad):
 
-			cantidad = int(input("Cuantos deseas agregar? "))
-			f_bucle = 0
-			while f_bucle<cantidad:
-				lista.append(productos[op])
-				f_bucle += 1
+			list_data=[(productos[op]),(int(seccion[str(op)])), (cantidad),(int(seccion[str(op)]) * lista.count(productos[op]))]
+
+			with open('ticket.csv', 'a', newline='') as f_object: 
+				writer_object = writer(f_object)
+				writer_object.writerow(list_data)
+				f_object.close()
+			return seccion,op,productos,cantidad
+
+		def compra_del_producto(seccion,op,productos,cantidad):
 
 			res = int(ticket[-1]) + (int(seccion[str(op)]) * cantidad)
 			ticket_actual.clear()
@@ -58,12 +69,12 @@ while True:
 			ticket.append(res)
 			print("\nSe ha agregado al carrito! ")
 
-			return seccion,op,productos,res
+			return seccion,op,productos,cantidad
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def Frutas_Verduras():
 			clearConsole()
 
-			print('===FRUTAS Y VERDURAS===\n\n1.-Tomates\n\n2.-Cebollas\n\n3.-Aguacates\n\n4.-Papas\n\n5.-Manzanas\n\n6.-Naranjas\n\n7.-Peras\n\n8.-Jicama\n\n9.-Duraznos')	
+			print('===FRUTAS Y VERDURAS===\n\n1.-Tomates\n\n2.-Cebollas\n\n3.-Aguacates\n\n4.-Papas\n\n5.-Manzanas\n\n6.-Naranjas\n\n7.-Peras\n\n8.-Jicama\n\n9.-Duraznos')
 
 			seccion = {'1':12,'2':11,'3':20,'4':15,'5':12,'6':13,'7':14,'8':22,'9':18}
 				
@@ -75,9 +86,13 @@ while True:
 			print(f"===COMPRA DEL PRODUCTO===\n\nProducto: {productos[op]}\n\nPrecio: $ {seccion[str(op)]}")
 
 			if input('\nAgregar al carrito (Y/N)? ').upper() == 'Y':
-				compra_del_producto(seccion,op,productos)
-				if int(ticket_actual[-1]):
-					carrito[(f"{productos[op]}")] = (f"{lista.count(productos[op])}\t\t{int(seccion[str(op)]) * lista.count(productos[op])}")
+				cantidad = int(input("Cuantos deseas agregar? "))
+				f_bucle = 0
+				while f_bucle<cantidad:
+					lista.append(productos[op])
+					f_bucle += 1
+				agregar_al_ticket(seccion,op,productos,cantidad)
+				compra_del_producto(seccion,op,productos,cantidad)
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def Higiene():
 			clearConsole()
@@ -94,9 +109,13 @@ while True:
 			print(f"===COMPRA DEL PRODUCTO===\n\nProducto: {productos[op]}\n\nPrecio: $ {seccion[str(op)]}")
 
 			if input('\nAgregar al carrito (Y/N)? ').upper() == 'Y':
-				compra_del_producto(seccion,op,productos)
-				if int(ticket_actual[-1]):
-					carrito[(f"{productos[op]}")] = (f"{lista.count(productos[op])}\t\t{int(seccion[str(op)]) * lista.count(productos[op])}")
+				cantidad = int(input("Cuantos deseas agregar? "))
+				f_bucle = 0
+				while f_bucle<cantidad:
+					lista.append(productos[op])
+					f_bucle += 1
+				agregar_al_ticket(seccion,op,productos,cantidad)
+				compra_del_producto(seccion,op,productos,cantidad)
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def Lacteos():
 			clearConsole()
@@ -113,9 +132,13 @@ while True:
 			print(f"===COMPRA DEL PRODUCTO===\n\nProducto: {productos[op]}\n\nPrecio: $ {seccion[str(op)]}")
 
 			if input('\nAgregar al carrito (Y/N)? ').upper() == 'Y':
-				compra_del_producto(seccion,op,productos)
-				if int(ticket_actual[-1]):
-					carrito[(f"{productos[op]}")] = (f"{lista.count(productos[op])}\t\t{int(seccion[str(op)]) * lista.count(productos[op])}")
+				cantidad = int(input("Cuantos deseas agregar? "))
+				f_bucle = 0
+				while f_bucle<cantidad:
+					lista.append(productos[op])
+					f_bucle += 1
+				agregar_al_ticket(seccion,op,productos,cantidad)
+				compra_del_producto(seccion,op,productos,cantidad)
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------		
 		def Panaderia():
 			clearConsole()
@@ -132,9 +155,13 @@ while True:
 			print(f"===COMPRA DEL PRODUCTO===\n\nProducto: {productos[op]}\n\nPrecio: $ {seccion[str(op)]}")
 
 			if input('\nAgregar al carrito (Y/N)? ').upper() == 'Y':
-				compra_del_producto(seccion,op,productos)
-				if int(ticket_actual[-1]):
-					carrito[(f"{productos[op]}")] = (f"{lista.count(productos[op])}\t\t{int(seccion[str(op)]) * lista.count(productos[op])}")
+				cantidad = int(input("Cuantos deseas agregar? "))
+				f_bucle = 0
+				while f_bucle<cantidad:
+					lista.append(productos[op])
+					f_bucle += 1
+				agregar_al_ticket(seccion,op,productos,cantidad)
+				compra_del_producto(seccion,op,productos,cantidad)
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def Mascotas():
 			clearConsole()
@@ -151,9 +178,13 @@ while True:
 			print(f"===COMPRA DEL PRODUCTO===\n\nProducto: {productos[op]}\n\nPrecio: $ {seccion[str(op)]}")
 
 			if input('\nAgregar al carrito (Y/N)? ').upper() == 'Y':
-				compra_del_producto(seccion,op,productos)
-				if int(ticket_actual[-1]):
-					carrito[(f"{productos[op]}")] = (f"{lista.count(productos[op])}\t\t{int(seccion[str(op)]) * lista.count(productos[op])}")
+				cantidad = int(input("Cuantos deseas agregar? "))
+				f_bucle = 0
+				while f_bucle<cantidad:
+					lista.append(productos[op])
+					f_bucle += 1
+				agregar_al_ticket(seccion,op,productos,cantidad)
+				compra_del_producto(seccion,op,productos,cantidad)
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def Galletas():
 			clearConsole()
@@ -170,9 +201,13 @@ while True:
 			print(f"===COMPRA DEL PRODUCTO===\n\nProducto: {productos[op]}\n\nPrecio: $ {seccion[str(op)]}")
 
 			if input('\nAgregar al carrito (Y/N)? ').upper() == 'Y':
-				compra_del_producto(seccion,op,productos)
-				if int(ticket_actual[-1]):
-					carrito[(f"{productos[op]}")] = (f"{lista.count(productos[op])}\t\t{int(seccion[str(op)]) * lista.count(productos[op])}")
+				cantidad = int(input("Cuantos deseas agregar? "))
+				f_bucle = 0
+				while f_bucle<cantidad:
+					lista.append(productos[op])
+					f_bucle += 1
+				agregar_al_ticket(seccion,op,productos,cantidad)
+				compra_del_producto(seccion,op,productos,cantidad)
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def Botanas():
 			clearConsole()
@@ -189,9 +224,13 @@ while True:
 			print(f"===COMPRA DEL PRODUCTO===\n\nProducto: {productos[op]}\n\nPrecio: $ {seccion[str(op)]}")
 
 			if input('\nAgregar al carrito (Y/N)? ').upper() == 'Y':
-				compra_del_producto(seccion,op,productos)
-				if int(ticket_actual[-1]):
-					carrito[(f"{productos[op]}")] = (f"{lista.count(productos[op])}\t\t{int(seccion[str(op)]) * lista.count(productos[op])}")
+				cantidad = int(input("Cuantos deseas agregar? "))
+				f_bucle = 0
+				while f_bucle<cantidad:
+					lista.append(productos[op])
+					f_bucle += 1
+				agregar_al_ticket(seccion,op,productos,cantidad)
+				compra_del_producto(seccion,op,productos,cantidad)
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def Legumbres():
 			clearConsole()
@@ -208,9 +247,13 @@ while True:
 			print(f"===COMPRA DEL PRODUCTO===\n\nProducto: {productos[op]}\n\nPrecio: $ {seccion[str(op)]}")
 
 			if input('\nAgregar al carrito (Y/N)? ').upper() == 'Y':
-				compra_del_producto(seccion,op,productos)
-				if int(ticket_actual[-1]):
-					carrito[(f"{productos[op]}")] = (f"{lista.count(productos[op])}\t\t{int(seccion[str(op)]) * lista.count(productos[op])}")
+				cantidad = int(input("Cuantos deseas agregar? "))
+				f_bucle = 0
+				while f_bucle<cantidad:
+					lista.append(productos[op])
+					f_bucle += 1
+				agregar_al_ticket(seccion,op,productos,cantidad)
+				compra_del_producto(seccion,op,productos,cantidad)
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------				
 		def Carniceria():
 			clearConsole()
@@ -227,9 +270,13 @@ while True:
 			print(f"===COMPRA DEL PRODUCTO===\n\nProducto: {productos[op]}\n\nPrecio: $ {seccion[str(op)]}")
 
 			if input('\nAgregar al carrito (Y/N)? ').upper() == 'Y':
-				compra_del_producto(seccion,op,productos)
-				if int(ticket_actual[-1]):
-					carrito[(f"{productos[op]}")] = (f"{lista.count(productos[op])}\t\t{int(seccion[str(op)]) * lista.count(productos[op])}")
+				cantidad = int(input("Cuantos deseas agregar? "))
+				f_bucle = 0
+				while f_bucle<cantidad:
+					lista.append(productos[op])
+					f_bucle += 1
+				agregar_al_ticket(seccion,op,productos,cantidad)
+				compra_del_producto(seccion,op,productos,cantidad)
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		def error():
 			print("\n# Utiliza enteros en el rango especificado #\n")
@@ -258,10 +305,12 @@ while True:
 #FUNC. TICKET DE COMPRA:
 	
 	def ticket_de_compra():
-		carrito[' '] = ' '
-		s = pd.Series(carrito,dtype = 'string')
+
+		filename = 'ticket.csv'
+		data = pd.read_csv(filename, header=0)
+
 		dt = datetime.now()
-		print(f"\n{'-'*58}\nCALIMAX - LOS ENCINOS\nPuerto Ballarta 505 - 5a Planta\n{rm.choice(range(10000,99999))} - Puerto Rico\nCIF: {rm.choice(range(12200000,99999999))}\n\nCaja N. : 22321\t\tFactura Simplificada: {rm.choice(range(222400000000,999999999999))}\n\nTe atiende: {rm.choice(empleados)}\t\tFecha: {date.today()} {dt.hour}:{dt.minute}\n\n{'-'*58}\n{s}\n{'-'*58}")
+		print(f"\n{'-'*58}\nCALIMAX - LOS ENCINOS\nPuerto Ballarta 505 - 5a Planta\n{rm.choice(range(10000,99999))} - Puerto Rico\nCIF: {rm.choice(range(12200000,99999999))}\n\nCaja N. : 22321\t\tFactura Simplificada: {rm.choice(range(222400000000,999999999999))}\n\nTe atiende: {rm.choice(empleados)}\t\tFecha: {date.today()} {dt.hour}:{dt.minute}\n\n{'-'*58}\n{data.head(1000)}\n{'-'*58}")
 
 		total_iva = int(ticket[-1]) + (int(ticket[-1])*0.08)
 		dinero_pagado = int(input("Dinero: "))
@@ -291,4 +340,5 @@ while True:
 			break
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 print("\nGracias por su compra!\n")
+borrar_ticket()
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
