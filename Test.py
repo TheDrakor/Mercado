@@ -10,14 +10,14 @@ from os import remove
 
 def clearConsole():
 	os.system('clear')
-def borrar_ticket():
-	remove('/home/jesus/Desktop/Testing/ticket.csv')
+def crear_ticket():
 	with open('ticket.csv', 'w') as csvfile:
 	    fieldnames = ['Producto', '        Precio', '        Cantidad', '        Total']
 	    writer = csv.DictWriter(csvfile, fieldnames = fieldnames)
 	    writer.writeheader()
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #VARIABLES:
+
 ticket = [0]
 ticket_actual = [0]
 cuenta = {}
@@ -30,7 +30,7 @@ lista = []
 empleados = ['MARIA','PEPE','JOSE','JAIME','XIMENA','ESTEPHANY','KARLA','GUILLERMO','HECTOR','JAZMIN']
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #CICLO WHILE:
-borrar_ticket()
+crear_ticket()
 while True:
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #MENU PRINCIPAL:
@@ -340,5 +340,5 @@ while True:
 			break
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 print("\nGracias por su compra!\n")
-borrar_ticket()
+remove('/home/jesus/Desktop/Testing/ticket.csv')
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
