@@ -342,3 +342,23 @@ while True:
 print("\nGracias por su compra!\n")
 remove('/home/jesus/Desktop/Testing/ticket.csv')
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+print("# Su factura le llegara a su Email #")
+
+signos_no_aceptados = [' ','!','"','#','$','%','`',',',':',';','<','>','[',']','|']
+
+while True:
+	email = str(input("Email: "))
+
+	if len(email[:email.find('@')]) >30:
+		print("Demasiado largo...")
+	else:
+		if email.count('@.') == True or email.count('.@') or email.count('@gmail.com') != True or email.count('@') > 1 or email.count("..") == True or email[-1] == '.' or email[0] == '.':
+			print("Invalido")
+		else:
+			for i in signos_no_aceptados:
+				if i in email:
+					print("Caracteres no permitidos")
+					break
+			else:
+				break
+print("Email Aceptado")
