@@ -1,10 +1,16 @@
 import os
+import smtplib
 import pandas as pd
 import random as rm
 import csv
 from datetime import date, time, datetime
 from csv import writer
 from os import remove
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
+
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #COMANDO CLEARCONSOLE,BORRAR_TICKET():
 
@@ -76,7 +82,7 @@ while True:
 
 			print('===FRUTAS Y VERDURAS===\n\n1.-Tomates\n\n2.-Cebollas\n\n3.-Aguacates\n\n4.-Papas\n\n5.-Manzanas\n\n6.-Naranjas\n\n7.-Peras\n\n8.-Jicama\n\n9.-Duraznos')
 
-			seccion = {'1':12,'2':11,'3':20,'4':15,'5':12,'6':13,'7':14,'8':22,'9':18}
+			seccion = {'1':32.90,'2':29.90,'3':99.00,'4':38.00,'5':42.90,'6':36.90,'7':48.90,'8':24.90,'9':49.90}
 				
 			op = int(input("\nElige una opcion -> "))
 
@@ -99,7 +105,7 @@ while True:
 
 			print('\n===HIGIENE===\n\n1.-Shampoo\n\n2.-Talco\n\n3.-Desodorante\n\n4.-Jabon para manos\n\n5.-Gel\n\n6.-Perfume\n\n7.-Crema corporal\n\n8.-Papel Higienico\n\n9.-Pasta Dental')
 				
-			seccion = {'1':23,'2':12,'3':24,'4':10,'5':25,'6':33,'7':42,'8':12,'9':16}
+			seccion = {'1':114.00,'2':23.50,'3':51.00,'4':20.00,'5':34.00,'6':82.00,'7':96.00,'8':23.00,'9':50.00}
 
 			op = int(input("\nElige una opcion -> "))
 
@@ -340,19 +346,20 @@ while True:
 			break
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 print("\nGracias por su compra!\n")
-remove('/home/jesus/Desktop/Testing/ticket.csv')
+#remove('/home/jesus/Desktop/Testing/ticket.csv')
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 print("# Su factura le llegara a su Email #")
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#ENVIO DE FACTURA:
 
 signos_no_aceptados = [' ','!','"','#','$','%','`',',',':',';','<','>','[',']','|']
-
 while True:
-	email = str(input("Email: "))
+	email = str(input("Introduzca su correo: "))
 
 	if len(email[:email.find('@')]) >30:
 		print("Demasiado largo...")
 	else:
-		if email.count('@.') == True or email.count('.@') or email.count('@gmail.com') != True or email.count('@') > 1 or email.count("..") == True or email[-1] == '.' or email[0] == '.':
+		if email.count('@.') == True or email.count('.@') or email.count('@') >=2 or email.count("..") == True or email[-1] == '.' or email[0] == '.':
 			print("Invalido")
 		else:
 			for i in signos_no_aceptados:
@@ -361,4 +368,32 @@ while True:
 					break
 			else:
 				break
-print("Email Aceptado")
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#ENVIO (DEBE SER @gmail.com):
+
+username = str(email)
+password = "(La info se encuentra en README)"
+mail_from = str(email)
+mail_to = str(email)
+mail_subject = "CALIMAX - LOS ENCINOS"
+mail_body = "# Ticket De Compra #"
+mail_attachment="(Ubicacion de donde estes trabajando Test.py)"
+mail_attachment_name="ticket.csv"
+mimemsg = MIMEMultipart()
+mimemsg['From']=mail_from
+mimemsg['To']=mail_to
+mimemsg['Subject']=mail_subject
+mimemsg.attach(MIMEText(mail_body, 'text/csv'))
+
+with open(mail_attachment, "rb") as attachment:
+	mimefile = MIMEBase('application', 'UTF -8')
+	mimefile.set_payload((attachment).read())
+	encoders.encode_base64(mimefile)
+	mimefile.add_header('Content-Disposition', "attachment; filename= %s" % mail_attachment_name)
+	mimemsg.attach(mimefile)
+	connection = smtplib.SMTP(host='smtp.gmail.com', port=587)
+	connection.starttls()
+	connection.login(username,password)
+	connection.send_message(mimemsg)
+	connection.quit()
+remove('Ubicacion de donde estes trabajando Test.py')
