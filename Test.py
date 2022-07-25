@@ -372,12 +372,12 @@ while True:
 #ENVIO (DEBE SER @gmail.com):
 
 username = str(email)
-password = "(La info se encuentra en README)"
+password = "(La info se encuentra en README.txt)"
 mail_from = str(email)
 mail_to = str(email)
 mail_subject = "CALIMAX - LOS ENCINOS"
 mail_body = "# Ticket De Compra #"
-mail_attachment="(Ubicacion de donde estes trabajando Test.py)"
+mail_attachment="(La info se encuentra en README.txt)"
 mail_attachment_name="ticket.csv"
 mimemsg = MIMEMultipart()
 mimemsg['From']=mail_from
@@ -396,4 +396,4 @@ with open(mail_attachment, "rb") as attachment:
 	connection.login(username,password)
 	connection.send_message(mimemsg)
 	connection.quit()
-remove('Ubicacion de donde estes trabajando Test.py')
+remove('La info se encuentra en README.txt')
