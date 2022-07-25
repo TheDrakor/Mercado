@@ -1,3 +1,22 @@
+Informacion importante:
+#-----------------------------------------------------------------------------------
+  Si llegas a copiar el codigo recuerda cambiar esta ruta:
+
+  - remove('/home/jesus/Desktop/Testing/ticket.csv')
+  
+  y cambiala por la ruta de la carpeta donde estes trabajando.
+  Por ejemplo en el escritorio:
+
+      remove('/home/jesus/Desktop/ticket.csv')
+
+  o en una carpeta tuya:
+
+      remove('/home/jesus/Desktop/nombre_de_la_carpeta/ticket.csv')
+
+#Recuerda que Test.py, ticket.csv deben estar en la misma carpeta\espacio de trabajo
+
+#-----------------------------------------------------------------------------------
+
 - INFO PARA (ENVIO DE FATCURA:)
 - DEBE SER UN CORREO ELECTRONICO GMAIL, DE LO CONTRARIO NO FUNCIONARA
 - EN LA VARIABLE "PASSWORD" DEBES HACER LO SIGUIENTE:
