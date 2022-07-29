@@ -1,3 +1,5 @@
+
+
 import os
 import smtplib
 import pandas as pd
@@ -26,10 +28,6 @@ try:
 	with open('ticket.csv', 'r') as f:
 		if input("\nSe encontro un archivo ticket.csv, quieres elimminarlo? (Y/N)").upper() == 'Y':
 			remove(f"{os.getcwd()}/ticket.csv")
-		else:
-			filename = 'ticket.csv'
-			data = pd.read_csv(filename, header=0)
-			print(f"==TICKET ANTIGUO==\n\n{data.head(1000)}")
 except FileNotFoundError as e:
 	
 #VARIABLES:
@@ -101,7 +99,7 @@ except FileNotFoundError as e:
 						elif len(email[:email.find('@')])<=0:
 							print("Escribe un email :)")
 						else:
-							if email.count('@.') == True or email.count('.@') or email.count('@') >=2 or email.count("..") == True or email[-1] == '.' or email[0] == '.':
+							if email.count('@.') == True or email.count('.@') == True or email.count('@') >=2 or email.count("..") == True or email[-1] == '.' or email[0] == '.':
 								print("Invalido")
 							else:
 								for i in signos_no_aceptados:
@@ -137,6 +135,9 @@ except FileNotFoundError as e:
 									break
 					except smtplib.SMTPAuthenticationError:
 						print("# Error de Autenticacion #")
+					except EOFError:
+						print("\n\n*** SALIDA FORZADA ***")
+						break
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		#MERCADO:
 
@@ -369,6 +370,9 @@ except FileNotFoundError as e:
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		except ValueError:
 			print("\n# ERROR #")
+		except EOFError:
+			print("\n\n*** SALIDA FORZADA ***")
+
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	#TICKET DE COMPRA:
 		
@@ -378,35 +382,44 @@ except FileNotFoundError as e:
 			data = pd.read_csv(filename, header=0)
 
 			dt = datetime.now()
-			print(f"\n{'-'*58}\nCALIMAX - LOS ENCINOS\nPuerto Ballarta 505 - 5a Planta\n{rm.choice(range(10000,99999))} - Puerto Rico\nCIF: {rm.choice(range(12200000,99999999))}\n\nCaja N. : 22321\t\tFactura Simplificada: {rm.choice(range(222400000000,999999999999))}\n\nTe atiende: {rm.choice(empleados)}\t\tFecha: {date.today()} {dt.hour}:{dt.minute}\n\n{'-'*58}\n{data.head(1000)}\n{'-'*58}")
+			print(f"{'-'*58}\nCALIMAX - LOS ENCINOS\nPuerto Ballarta 505 - 5a Planta\n{rm.choice(range(10000,99999))} - Puerto Rico\nCIF: {rm.choice(range(12200000,99999999))}\n\nCaja N. : 22321\t\tFactura Simplificada: {rm.choice(range(222400000000,999999999999))}\n\nTe atiende: {rm.choice(empleados)}\t\tFecha: {date.today()} {dt.hour}:{dt.minute}\n\n{'-'*58}\n{data.head(1000)}\n{'-'*58}")
 
 			total_iva = int(ticket[-1]) + (int(ticket[-1])*0.08)
-			dinero_pagado = int(input("Dinero: "))
 
-			if dinero_pagado<int(total_iva):
-				print('Dinero insuficiente...')
-				return
-			elif dinero_pagado>int(total_iva):
-				print("")
-				cuenta['Subtotal:              '] = ticket[-1]
-				cuenta['IVA %8:'] = int(ticket[-1])*0.08
-				cuenta['Total:'] = total_iva
-				cuenta['Usted pago:'] = (dinero_pagado)
-				cuenta['Cambio:'] = (dinero_pagado - total_iva)
-				cuenta[' '] = ' '
-				c = pd.Series(cuenta)
-				print(c)
+			while True:
+				try:
+					dinero_pagado = int(input("Dinero: "))
+
+					if dinero_pagado<int(total_iva):
+						print('Dinero insuficiente...')
+
+					elif dinero_pagado>int(total_iva):
+						print("")
+						cuenta['Subtotal:              '] = ticket[-1]
+						cuenta['IVA %8:'] = int(ticket[-1])*0.08
+						cuenta['Total:'] = total_iva
+						cuenta['Usted pago:'] = (dinero_pagado)
+						cuenta['Cambio:'] = (dinero_pagado - total_iva)
+						cuenta[' '] = ' '
+						c = pd.Series(cuenta)
+						print(c)
+						break
+				except ValueError:
+					print("# ERROR #")
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	#SALIDA:
-
-		if str(input("\nPresiona 'X' para salir '0' para continuar -> ").upper()) == 'X':
-			if ticket[-1] == 0:
-				break
-			else:
-				clearConsole()
-				ticket_de_compra()
-				enviar_ticket_gmail()
-				break
+		try:
+			if str(input("\nPresiona 'X' para salir '0' para continuar -> ").upper()) == 'X':
+				if ticket[-1] == 0:
+					break
+				else:
+					clearConsole()
+					ticket_de_compra()
+					enviar_ticket_gmail()
+					break
+		except EOFError:
+			print("\n\n***SALIDA FORZADA***")
+			break
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	print("\nGracias por su compra!\n")
 	
